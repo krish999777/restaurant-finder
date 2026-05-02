@@ -24,14 +24,12 @@ const ratingSchema=new Schema<Rating>({
     name:{
         type:String,
         required:true,
-        trim:true,
-        lowercase:true
+        trim:true
     },
     description:{
         type:String,
         required:true,
-        trim:true,
-        lowercase:true
+        trim:true
     },
     rating:{
         type:Number,
@@ -44,14 +42,11 @@ const restaurantSchema=new Schema<Restaurant>({
     name:{           
     type: String,
     required: true,
-    unique: false,
-    lowercase: true,
     trim: true
     },
     description:{           
     type: String,
     required: true,
-    lowercase: true,
     trim: true
     },
     categories:{           
