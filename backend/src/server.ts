@@ -6,7 +6,7 @@ import db from './config/db'
 const app:Express=express()
 dotenv.config()
 app.use(express.json())
-async function startServer() {
+async function startServer():Promise<void> {
   try {
     await db();
     app.listen(process.env.PORT, () => {
@@ -18,6 +18,3 @@ async function startServer() {
   }
 }
 startServer()
-
-
-app.listen(process.env.PORT,()=>console.log(`Server listening on port ${process.env.PORT}`))
