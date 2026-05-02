@@ -53,3 +53,23 @@ export async function postRestaurantsController(
         res.status(500).json({error:"Internal server error"})
     }
 }
+export async function getRestaurantsController(req:Request<null,unknown,unknown,{search:string|undefined,category:string|undefined}>,res:Response){
+    const {search,category}=req.query
+    let query:{
+        name?:{$regex:RegExp|string},
+        categories?:string
+    }={}
+    if(category){
+        query.categories=category
+    }
+    if(search){
+        query.name={$regex:new RegExp(search, 'i')}
+    }
+    try{
+        const restaurants=await Restaurants.find(query).lean()
+        res.status(200).json({restaurants})
+    }catch(err){
+        console.log(err)
+        res.status(500).json({error:"Internal server error"})
+    }
+}
