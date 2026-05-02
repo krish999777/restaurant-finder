@@ -8,7 +8,7 @@ type Rating={
     createdAt?: Date,
     updatedAt?: Date
 }
-type Restaurant={
+export type Restaurant={
     name: string,
     description: string,
     categories?: string[],

@@ -2,10 +2,15 @@ import express from 'express'
 import type {Express} from 'express'
 import dotenv from 'dotenv'
 import db from './config/db'
+import restaurantsRouter from './routers/restaurantsRouter'
 
 const app:Express=express()
+
 dotenv.config()
+
 app.use(express.json())
+app.use('/api/restaurants',restaurantsRouter)
+
 async function startServer():Promise<void> {
   try {
     await db();
