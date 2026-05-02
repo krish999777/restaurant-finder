@@ -1,6 +1,46 @@
 import mongoose from 'mongoose'
 const {Schema}=mongoose
-const restaurantSchema=new Schema({
+
+type Rating={
+    name:string,
+    description:string,
+    rating:number,
+    createdAt?: Date,
+    updatedAt?: Date
+}
+type Restaurant={
+    name: string,
+    description: string,
+    categories?: string[],
+    location: GeoLocation,
+    address: string,
+    sumRating?: number,
+    ratings?:Rating[],
+    createdAt?: Date,
+    updatedAt?: Date
+}
+
+const ratingSchema=new Schema<Rating>({
+    name:{
+        type:String,
+        required:true,
+        trim:true,
+        lowercase:true
+    },
+    description:{
+        type:String,
+        required:true,
+        trim:true,
+        lowercase:true
+    },
+    rating:{
+        type:Number,
+        required:true,
+        min:1,
+        max:5
+    }
+},{ timestamps: true })
+const restaurantSchema=new Schema<Restaurant>({
     name:{           
     type: String,
     required: true,
@@ -30,38 +70,24 @@ const restaurantSchema=new Schema({
         }
     },
     address:{           
-    type: String,
-    required: true,
-    lowercase: true,
-    trim: true
+        type: String,
+        required: true,
+        lowercase: true,
+        trim: true
     },
-    rating:{
+    sumRating:{
         type:Number,
         default:0
     },
-    ratingCount:{
-        type:Number,
-        default:0
-    }
-
+    ratings:[ratingSchema]
 },{ timestamps: true })
 
 restaurantSchema.index({location: "2dsphere"})
-type GeoLocation ={
+type GeoLocation={
     type: 'Point',
     coordinates: number[]
 }
 
-type Restaurant ={
-    name: string,
-    description: string,
-    categories?: string[],
-    location: GeoLocation,
-    address: string,
-    rating?: number,
-    ratingCount?:number,
-    createdAt?: Date,
-    updatedAt?: Date
-}
 
-export default mongoose.model<Restaurant>('restaurants', restaurantSchema)
+
+export default mongoose.model<Restaurant>('Restaurant', restaurantSchema)
