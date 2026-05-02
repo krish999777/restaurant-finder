@@ -25,7 +25,7 @@ export async function postRestaurantsController(
         if(!name||!description||!address){
             return res.status(400).json({error:"Invalid request"})
         }
-        if(categories&&!categories.every(cat=>typeof(cat)==='string')){
+        if(categories&&(!Array.isArray(categories)||!categories.every(cat=>typeof(cat)==='string'))){
             return res.status(400).json({error:"Invalid categories"})
         }
         if (
