@@ -1,6 +1,6 @@
 import type {Request,Response} from 'express'
 import Restaurants from '../models/restaurant'
-import type {Restaurant} from '../models/restaurant'
+import type {RestaurantType} from '../models/restaurant'
 
 type RequestBody={
     name:string,
@@ -12,7 +12,7 @@ type RequestBody={
 
 export async function postRestaurantsController(
     req:Request<null,unknown,RequestBody>,
-    res:Response<{restaurant:Restaurant}|{error:string}>
+    res:Response<{restaurant:RestaurantType}|{error:string}>
 ){
     let {name,description,categories,coordinates,address}:RequestBody=req.body
     try{
