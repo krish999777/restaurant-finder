@@ -134,7 +134,9 @@ export async function getRestaurantsNearController(req:Request<null,unknown,unkn
     }
     
     try{
-        const restaurants=await Restaurants.find(query).lean()
+        const restaurants=await Restaurants.find(query)
+        .limit(10)
+        .lean()
         res.status(200).json({restaurants})
     }catch(err){
         console.log(err)
