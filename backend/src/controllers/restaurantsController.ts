@@ -146,7 +146,18 @@ export async function getRestaurantsNearController(req:Request<null,unknown,unkn
         const restaurants=await Restaurants.find(query)
         .limit(10)
         .lean()
-        res.status(200).json({restaurants})
+        const updatedRestaurants=restaurants.map(rest=>{
+            const sum=rest.sumRating
+            const count=rest.ratings.length
+            const avg=count===0?0:sum/count
+            return {
+                ...rest,
+                avgRating:avg
+            }
+        })
+        res.status(200).json({
+            restaurants:updatedRestaurants
+        })
     }catch(err){
         console.log(err)
         res.status(500).json({error:"Internal server error"})
