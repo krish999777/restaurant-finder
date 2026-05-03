@@ -73,3 +73,56 @@ export async function getRestaurantsController(req:Request<null,unknown,unknown,
         res.status(500).json({error:"Internal server error"})
     }
 }
+export async function getRestaurantsNearController(req:Request<null,unknown,unknown,{
+    lat:string,
+    long:string,
+    radius:string,
+    search:string|undefined,
+    category:string|undefined
+}>,res:Response){
+    type Query={
+        location:{
+            $near:{
+                $geometry:{type:'Point',coordinates:[number,number]},
+                $maxDistance:number
+            }
+        },
+        name?:{$regex:RegExp|string},
+        categories?:string
+    }
+    let {lat,long,radius,search,category}=req.query
+    if(!lat||!long){
+        return res.status(400).json({error:'Missing lat,long or radius parameters'})
+    }
+    if(!radius){
+        radius='20000000'
+    }
+    const numLat=Number(lat)
+    const numLong=Number(long)
+    const numRadius=Number(radius)
+    if(isNaN(numLat)||isNaN(numLong)||isNaN(numRadius)){
+        return res.status(400).json({error:'lat,long and radius parameters must be numbers'})
+    }
+    let query:Query={
+            location: {
+                $near: {
+                    $geometry: { type: "Point", coordinates: [ numLong, numLat ] },
+                    $maxDistance: numRadius
+                }
+            }
+        }
+    if(search){
+        query.name={$regex:new RegExp(search, 'i')}
+    }
+    if(category){
+        query.categories=category
+    }
+    
+    try{
+        const restaurants=await Restaurants.find(query).lean()
+        res.status(200).json({restaurants})
+    }catch(err){
+        console.log(err)
+        res.status(500).json({error:"Internal server error"})
+    }
+}
