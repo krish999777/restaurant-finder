@@ -8,7 +8,7 @@ type Rating={
     createdAt?: Date,
     updatedAt?: Date
 }
-export type Restaurant={
+export type RestaurantType={
     name: string,
     description: string,
     categories?: string[],
@@ -38,7 +38,7 @@ const ratingSchema=new Schema<Rating>({
         max:5
     }
 },{ timestamps: true })
-const restaurantSchema=new Schema<Restaurant>({
+const restaurantSchema=new Schema<RestaurantType>({
     name:{           
     type: String,
     required: true,
@@ -85,4 +85,4 @@ type GeoLocation={
 
 
 
-export default mongoose.model<Restaurant>('Restaurant', restaurantSchema)
+export default mongoose.model<RestaurantType>('Restaurant', restaurantSchema)
