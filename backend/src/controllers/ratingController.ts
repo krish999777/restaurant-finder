@@ -49,3 +49,22 @@ export async function postRatingController(req:Request<{id:string},unknown,ratin
         res.status(500).json({error:"Internal server error"})
     }
 }
+export async function avgRating(req:Request<{id:string}>,res:Response){
+    const {id}=req.params
+    if(!id||!mongoose.Types.ObjectId.isValid(id)){
+        return res.status(400).json({error:"Invalid id"})
+    }
+    try{
+        const restaurant=await Restaurant.findById(id,{sumRating:1,ratings:1})
+        if(!restaurant){
+            return res.status(404).json({error:"Restaurant not found"})
+        }
+        const sum=restaurant.sumRating
+        const count=restaurant.ratings.length
+        const avg=count===0?0:sum/count
+        return res.status(200).json({avgRating:avg})
+    }catch(err){
+        console.log(err)
+        return res.status(500).json({error:"Internal server error"})
+    }
+}

@@ -14,7 +14,7 @@ export type RestaurantType={
     categories?: string[],
     location: GeoLocation,
     address: string,
-    sumRating?: number,
+    sumRating: number,
     ratings:Rating[],
     createdAt?: Date,
     updatedAt?: Date
