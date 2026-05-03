@@ -77,8 +77,17 @@ export async function getRestaurantsController(req:Request<null,unknown,unknown,
         .skip(skip)
         .limit(10)
         .lean()
+        const updatedRestaurants=restaurants.map(rest=>{
+            const sum=rest.sumRating
+            const count=rest.ratings.length
+            const avg=count===0?0:sum/count
+            return {
+                ...rest,
+                avgRating:avg
+            }
+        })
         res.status(200).json({
-            restaurants,
+            restaurants:updatedRestaurants,
             total,
             page: numPage,
             pages: Math.ceil(total / 10)

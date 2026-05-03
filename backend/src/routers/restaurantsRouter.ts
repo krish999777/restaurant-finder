@@ -1,7 +1,7 @@
 import express from 'express'
 import type {Router} from 'express'
 import {postRestaurantsController,getRestaurantsController,getRestaurantsNearController} from '../controllers/restaurantsController'
-import {postRatingController,avgRating} from '../controllers/ratingController'
+import {postRatingController} from '../controllers/ratingController'
 
 const router:Router=express.Router()
 
@@ -9,6 +9,5 @@ router.post('/',postRestaurantsController)
 router.get('/',getRestaurantsController)
 router.get('/near',getRestaurantsNearController)
 router.post('/:id/rating',postRatingController)
-router.get('/:id/avgRating',avgRating)
 
 export default router
