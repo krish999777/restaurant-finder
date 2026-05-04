@@ -33,7 +33,7 @@ export async function loginController(req:Request,res:Response){
             role:user.role
         },key,{expiresIn:'8h'})
         return res.status(200).json({
-            token,
+            token:`BEARER ${token}`,
             user:{
                 name:user.name,
                 email:user.email,

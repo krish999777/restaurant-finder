@@ -42,7 +42,7 @@ export async function signupController(req:Request<null,unknown,{
             role:user.role
         },secret,{expiresIn:'8h'})
         res.status(201).json({
-            token,
+            token:`BEARER ${token}`,
             user:{
                 name,
                 email,
