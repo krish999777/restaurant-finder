@@ -56,13 +56,15 @@ export async function postRestaurantsController(
 export async function getRestaurantsController(req:Request<null,unknown,unknown,{
     search:string|undefined,
     category:string|undefined,
-    page:string|undefined
+    page:string|undefined,
+    sort:string|undefined
 }>,res:Response){
-    const {search,category,page}=req.query
+    const {search,category,page,sort}=req.query
     let query:{
         name?:{$regex:RegExp|string},
         categories?:string
     }={}
+    let sortOption={}
     const numPage=Math.max(1, Number(page) || 1)
     if(category){
         query.categories=category
@@ -70,10 +72,18 @@ export async function getRestaurantsController(req:Request<null,unknown,unknown,
     if(search){
         query.name={$regex:new RegExp(search, 'i')}
     }
+    if(sort==='latest'){
+        sortOption={createdAt:-1}
+    }else if(sort==='oldest'){
+        sortOption={createdAt:1}
+    }else if(sort==="rating"){
+        sortOption={sumRating:-1}
+    }
     const skip:number=(numPage-1)*10
     const total = await Restaurants.countDocuments(query)
     try{
         const restaurants=await Restaurants.find(query)
+        .sort(sortOption)
         .skip(skip)
         .limit(10)
         .lean()
