@@ -4,13 +4,14 @@ import dotenv from 'dotenv'
 import db from './config/db'
 import restaurantsRouter from './routers/restaurantsRouter'
 import authRouter from './routers/authRouter'
+import isAuthenticated from './middleware/isAuthenticated'
 
 const app:Express=express()
 
 dotenv.config()
 
 app.use(express.json())
-app.use('/api/restaurants',restaurantsRouter)
+app.use('/api/restaurants',isAuthenticated,restaurantsRouter)
 app.use('/auth',authRouter)
 
 async function startServer():Promise<void> {
