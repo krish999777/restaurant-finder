@@ -46,11 +46,27 @@ export async function putEachRestaurant(req:Request<{id:string},unknown,{
         restaurant.description=description?description.trim()?description.trim():restaurant.description:restaurant.description
         restaurant.categories=categories?categories.length>0?categories:restaurant.categories:restaurant.categories
         restaurant.address=address?address.trim()?address.trim():restaurant.address:restaurant.address
-        restaurant.location.coordinates=coordinates?coordinates:restaurant.location.coordinates
+        restaurant.location.coordinates=coordinates?coordinates.length===2?coordinates:restaurant.location.coordinates:restaurant.location.coordinates
         await restaurant.save()
         return res.status(200).json({ restaurant })
     }catch(err){
         console.log(err)
         return res.status(500).json({error:"Internal server error"})
     }   
+}
+export async function deleteEachRestaurant(req:Request<{id:string}>,res:Response){
+    const {id}=req.params
+    if(!mongoose.Types.ObjectId.isValid(id)){
+        return res.status(400).json({error:"invalid id"})
+    }
+    try{
+        const restaurant=await Restaurant.findByIdAndDelete(id)
+        if(!restaurant){
+            return res.status(404).json({error:"Restaurant not found"})
+        }
+        return res.status(204).send()
+    }catch(err){
+        console.log(err)
+        res.status(500).json({error:"Internal server error"})
+    }
 }
