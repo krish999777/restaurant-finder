@@ -8,7 +8,9 @@ export async function getEachRestaurant(req:Request<{id:string}>,res:Response){
         return res.status(400).json({error:"invalid id"})
     }
     try{
-        const restaurant=await Restaurant.findById(id).lean()
+        const restaurant=await Restaurant.findById(id)
+        .populate('ratings.userId','name')
+        .lean()
         if(!restaurant){
             return res.status(404).json({error:"Restaurant not found"})
         }
