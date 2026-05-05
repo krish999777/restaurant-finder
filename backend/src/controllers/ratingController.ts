@@ -34,6 +34,12 @@ export async function postRatingController(req:Request<{id:string},unknown,ratin
         if(!restaurant){//i have compromised it for additional type safety provided by mongoose
             return res.status(404).json({error:"Restaurant not found"})
         }
+        const hasRated=restaurant.ratings.some(rating=>{
+            return rating.userId.equals(userId)
+        })
+        if(hasRated){
+            return res.status(400).json({error:"Cannot rate restaurant twice"})
+        }
         restaurant.sumRating=restaurant.sumRating?restaurant.sumRating+rating:rating
         restaurant.ratings.push({
             rating,
