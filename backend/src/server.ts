@@ -5,14 +5,16 @@ import db from './config/db'
 import restaurantsRouter from './routers/restaurantsRouter'
 import authRouter from './routers/authRouter'
 import isAuthenticated from './middleware/isAuthenticated'
+import cors from 'cors'
 
 const app:Express=express()
 
 dotenv.config()
 
+app.use(cors())
 app.use(express.json())
 app.use('/api/restaurants',isAuthenticated,restaurantsRouter)
-app.use('/auth',authRouter)
+app.use('/api/auth',authRouter)
 
 async function startServer():Promise<void> {
   try {
