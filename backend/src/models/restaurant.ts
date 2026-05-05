@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 const {Schema}=mongoose
 
 type Rating={
-    name:string,
+    userId:mongoose.Types.ObjectId,
     description:string,
     rating:number,
     createdAt?: Date,
@@ -21,10 +21,9 @@ export type RestaurantType={
 }
 
 const ratingSchema=new Schema<Rating>({
-    name:{
-        type:String,
+    userId:{
+        type:mongoose.Schema.Types.ObjectId,
         required:true,
-        trim:true
     },
     description:{
         type:String,

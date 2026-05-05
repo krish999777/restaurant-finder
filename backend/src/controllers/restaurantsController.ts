@@ -11,7 +11,7 @@ type RequestBody={
 }
 
 export async function postRestaurantsController(
-    req:Request<null,unknown,RequestBody>,
+    req:Request<{},unknown,RequestBody>,
     res:Response<{restaurant:RestaurantType}|{error:string}>
 ){
     let {name,description,categories,coordinates,address}:RequestBody=req.body

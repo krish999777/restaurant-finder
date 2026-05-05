@@ -24,4 +24,11 @@ const user=new mongoose.Schema({
         default:"user"
     }
 },{ timestamps: true })
+
+export type UserType = {
+  _id: string
+  name: string
+  email: string
+  role: string
+}
 export default mongoose.model('User',user)

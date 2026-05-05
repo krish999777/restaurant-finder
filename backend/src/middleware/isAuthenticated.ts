@@ -1,7 +1,8 @@
-import type {Response,NextFunction} from 'express'
+import type {Request,Response,NextFunction} from 'express'
+import mongoose from 'mongoose'
 import jwt from 'jsonwebtoken'
 
-export default function(req:any,res:Response,next:NextFunction){
+export default function(req:Request,res:Response,next:NextFunction){
     const authHeader=req.headers.authorization
     if(!authHeader){
         return res.status(401).json({error:"Not authorized"})
@@ -16,7 +17,10 @@ export default function(req:any,res:Response,next:NextFunction){
         return res.status(500).json({error:"JWT key missing"})
     }
     try{
-        const payload=jwt.verify(token,key)
+        const payload=jwt.verify(token,key) as {id:mongoose.Types.ObjectId,role:string}
+        if(typeof(payload)==='string'){
+            return res.status(401).json({error:"Not authorized"})
+        }
         req.user=payload
         next()
     }catch(err){
