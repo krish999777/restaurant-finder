@@ -23,6 +23,7 @@ export type RestaurantType={
 const ratingSchema=new Schema<Rating>({
     userId:{
         type:mongoose.Schema.Types.ObjectId,
+        ref:'User',
         required:true,
     },
     description:{

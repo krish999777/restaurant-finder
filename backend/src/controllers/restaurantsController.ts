@@ -83,6 +83,7 @@ export async function getRestaurantsController(req:Request<null,unknown,unknown,
     const total = await Restaurants.countDocuments(query)
     try{
         const restaurants=await Restaurants.find(query)
+        .populate('ratings.userId','name')
         .sort(sortOption)
         .skip(skip)
         .limit(10)
@@ -154,6 +155,7 @@ export async function getRestaurantsNearController(req:Request<null,unknown,unkn
     
     try{
         const restaurants=await Restaurants.find(query)
+        .populate('ratings.userId','name')
         .limit(10)
         .lean()
         const updatedRestaurants=restaurants.map(rest=>{
