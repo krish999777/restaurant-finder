@@ -2,3 +2,14 @@
   padding:0;
   margin:0;
 }
+:root {
+  --bg: #fff7ed;
+  --panel: #ffffff;
+  --primary: #ea580c;
+  --primary-hover: #c2410c;
+  --accent: #fb923c;
+  --text: #1c1917;
+  --subtext: #78716c;
+  --border: #fed7aa;
+  --error: #dc2626;
+}
