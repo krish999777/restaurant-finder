@@ -13,3 +13,16 @@
   --border: #fed7aa;
   --error: #dc2626;
 }
+/* FORCE override anchor defaults */
+.login-link a {
+  all: unset;              /* removes all browser default styles */
+  cursor: pointer;
+  margin-left: 0.3rem;
+  color: var(--primary);
+  font-weight: 500;
+}
+
+.login-link a:hover {
+  color: var(--primary-hover);
+  text-decoration: underline;
+}

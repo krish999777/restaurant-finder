@@ -23,3 +23,17 @@ export async function postLogin(body:{
         throw new Error(err.response?.data?.error || "Login failed")
     }
 }
+export async function postSignup(body:{
+    name:string,
+    email:string,
+    password:string
+}){
+    try{
+        const res=await api.post('/auth/signup',body)
+        const {token,user}=res.data
+        localStorage.setItem("token", token)
+        return user
+    }catch(err){
+        throw new Error(err.response?.data?.error||'Sign up failed')
+    }
+}
