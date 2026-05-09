@@ -3,6 +3,7 @@ import Login from './pages/Login'
 import Signup from './pages/Signup'
 import ProtectedRoute from './components/ProtectedRoute'
 import Restaurants from './pages/Restaurants'
+import EachRestaurant from './pages/EachRestaurant'
 
 export default function(){
   return(
@@ -14,7 +15,12 @@ export default function(){
           <ProtectedRoute>
             <Restaurants/>
           </ProtectedRoute>
-          }/>
+        }/>
+        <Route path="/restaurants/:id" element={
+          <ProtectedRoute>
+            <EachRestaurant/>
+          </ProtectedRoute>
+        }/>
       </Routes>
     </BrowserRouter>
   )

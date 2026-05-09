@@ -10,6 +10,35 @@ api.interceptors.request.use((config) => {
   }
   return config
 })
+export type RatingType={
+    _id:string,
+    userId:{
+        _id:string,
+        name:string
+    },
+    description:string,
+    rating:number,
+    createdAt:string,
+    updatedAt:string
+}
+
+export type RestaurantType={
+    _id:string,
+    name:string,
+    description:string,
+    categories:string[],
+    location:{
+        type:"Point",
+        coordinates:[number,number]
+    },
+    address:string,
+    avgRating:number,
+    sumRating:number,
+    ratings:RatingType[]
+    createdAt:string,
+    updatedAt:string,
+    __v:number
+}
 export async function postLogin(body:{
     email:string,
     password:string
@@ -63,43 +92,19 @@ export async function getAllRestaurants({search,category,page,sort}:{
         throw new Error(err.response?.data?.error)
     }
 }
-export type RatingType={
-    _id:string,
-    userId:{
-        _id:string,
-        name:string
-    },
-    description:string,
-    rating:number,
-    createdAt:string,
-    updatedAt:string
+export async function getEachRestaurant(id:string){
+    try{
+        const res=await api.get(`/restaurants/${id}`)
+        return res.data
+    }catch(err){
+        throw new Error(err.response?.data?.error)
+    }
 }
-
-export type RestaurantType={
-    _id:string,
-    name:string,
-    description:string,
-    categories:string[],
-    location:{
-        type:"Point",
-        coordinates:[number,number]
-    },
-    address:string,
-    avgRating:number,
-    sumRating:number,
-    ratings:RatingType[]
-    createdAt:string,
-    updatedAt:string,
-    __v:number
+export async function postRating(id:string,body:{rating:number,description:string}){
+    try{
+        const res=await api.post(`/restaurants/${id}/rating`,body)
+        return res.data
+    }catch(err){
+        throw new Error(err.response?.data?.error)
+    }
 }
-// {
-//     "userId": {
-//         "_id": "69f89bb6d1a3695b33bf66c0",
-//         "name": "admin"
-//     },
-//     "description": "Cheese tease was the best",
-//     "rating": 5,
-//     "_id": "69f983605c0f6a3d61da55bc",
-//     "createdAt": "2026-05-05T05:42:56.962Z",
-//     "updatedAt": "2026-05-05T05:42:56.962Z"
-// }
