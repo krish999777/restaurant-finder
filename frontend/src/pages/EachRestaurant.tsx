@@ -73,8 +73,6 @@ export default function(){
                     ← Back to restaurants
                 </Link>
 
-                {/* HEADER */}
-
                 <div className="restaurant-header">
 
                     <div className="restaurant-header-left">
@@ -98,8 +96,6 @@ export default function(){
 
                 </div>
 
-                {/* ABOUT */}
-
                 <div className="restaurant-section">
 
                     <h2>About</h2>
@@ -109,8 +105,6 @@ export default function(){
                     </p>
 
                 </div>
-
-                {/* REVIEWS */}
 
                 <div className="restaurant-section">
 

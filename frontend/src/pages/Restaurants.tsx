@@ -179,11 +179,12 @@ export default function(){
 
             </div>
 
-        ) : (
+        ) : ''}
+        {loading?(
             <div className="loading-state">
                 Loading restaurants...
             </div>
-        )}
+        ):''}
     </div>
 )
 }
