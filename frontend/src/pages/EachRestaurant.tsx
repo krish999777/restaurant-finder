@@ -3,6 +3,7 @@ import {useParams,Link} from 'react-router-dom'
 import {useState,useEffect} from 'react'
 import type {RestaurantType} from '../utils/api'
 import {getEachRestaurant,postRating} from '../utils/api'
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 
 export default function(){
     const [error,setError]=useState<string|null>(null)
@@ -94,6 +95,23 @@ export default function(){
                         ⭐ {restaurant.avgRating.toFixed(1)}
                     </div>
 
+                </div>
+                <div className="restaurant-map">
+                        <MapContainer 
+                            center={[restaurant.location.coordinates[1], restaurant.location.coordinates[0]]}
+                            zoom={15}
+                            scrollWheelZoom={false}
+                        >
+                            <TileLayer
+                                attribution='&copy; OpenStreetMap contributors'
+                                url={`https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png`}
+                            />
+                            <Marker position={[restaurant.location.coordinates[1], restaurant.location.coordinates[0]]}>
+                                <Popup>
+                                    {restaurant.name}
+                                </Popup>
+                            </Marker>
+                        </MapContainer>
                 </div>
 
                 <div className="restaurant-section">

@@ -277,3 +277,15 @@
     color: var(--primary-hover);
     transform: translateX(-2px);
 }
+.restaurant-map {
+    height: 350px;
+    width: 100%;
+    border-radius: 18px;
+    overflow: hidden;
+    margin-top: 1rem;
+}
+.leaflet-container {
+    height: 100%;
+    width: 100%;
+    border-radius: 18px;
+}
