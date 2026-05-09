@@ -1,7 +1,7 @@
 import './Restaurants.css'
 import {useState,useEffect} from 'react'
 import {Link} from 'react-router-dom'
-import {getAllRestaurants} from '../utils/api'
+import {getAllRestaurants,getNearRestaurants} from '../utils/api'
 import type {RestaurantType} from '../utils/api'
 
 export default function(){
@@ -15,13 +15,27 @@ export default function(){
     const [loading,setLoading]=useState<boolean>(false)
     const [search,setSearch]=useState<string|null>(null)
     const [page,setPage]=useState<number>(1)
-    const [sort,setSort]=useState<'latest'|'oldest'|'rating'|null>(null)
-    const [category,setCategory]=useState<string>(null)
+    const [sort,setSort]=useState<'latest'|'oldest'|'rating'|'near'|null>(null)
+    const [category,setCategory]=useState<string|null>(null)
 
     useEffect(()=>{
         async function fetchData(){
             try{
                 setLoading(true)
+                if(sort==='near'){
+                    navigator.geolocation.getCurrentPosition(async (position) => {
+                        const lat = position.coords.latitude
+                        const long = position.coords.longitude
+                        const d=await getNearRestaurants({
+                            lat,
+                            long,
+                            search,
+                            category
+                        })
+                        setRestaurants(d)
+                    });
+                    return
+                }
                 const d=await getAllRestaurants({
                     search,
                     page,
@@ -86,6 +100,12 @@ export default function(){
                     onClick={() => setSort('rating')}
                 >
                     Ratings
+                </button>
+                <button
+                    className={sort === 'near' ? 'active-sort' : ''}
+                    onClick={() => setSort('near')}
+                >
+                    Nearest
                 </button>
             </div>
 

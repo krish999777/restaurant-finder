@@ -108,3 +108,23 @@ export async function postRating(id:string,body:{rating:number,description:strin
         throw new Error(err.response?.data?.error)
     }
 }
+export async function getNearRestaurants({lat,long,search,category}:{
+    lat:number,
+    long:number,
+    search?:string,
+    category?:string
+}){
+    try{
+        let query:string=""
+        if(search){
+            query+=`&search=${search}`
+        }
+        if(category){
+            query+=`&category=${category}`
+        }
+        const res=await api.get(`/restaurants/near?lat=${lat}&long=${long}${query}`)
+        return res.data
+    }catch(err){
+        throw new Error(err.response?.data?.error)
+    }
+}
