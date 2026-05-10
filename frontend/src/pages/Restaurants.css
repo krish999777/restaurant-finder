@@ -227,3 +227,34 @@
     color: var(--text);
     font-weight: 500;
 }
+.add-restaurant-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    padding: 0.85rem 1.2rem;
+
+    background: linear-gradient(
+        135deg,
+        var(--primary),
+        var(--accent)
+    );
+
+    color: white;
+    text-decoration: none;
+
+    border-radius: 14px;
+
+    font-weight: 600;
+    font-size: 0.92rem;
+
+    transition: 0.2s ease;
+
+
+    box-shadow: 0 8px 18px rgba(234, 88, 12, 0.18);
+}
+
+.add-restaurant-link:hover {
+    transform: translateY(-2px);
+    opacity: 0.95;
+}

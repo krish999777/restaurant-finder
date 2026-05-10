@@ -1,8 +1,9 @@
 import './Restaurants.css'
 import {useState,useEffect} from 'react'
-import {Link} from 'react-router-dom'
+import {Link,Navigate} from 'react-router-dom'
 import {getAllRestaurants,getNearRestaurants} from '../utils/api'
 import type {RestaurantType} from '../utils/api'
+import {getPayload} from '../utils/jwt'
 
 export default function(){
     const [restaurants,setRestaurants]=useState<{
@@ -17,6 +18,13 @@ export default function(){
     const [page,setPage]=useState<number>(1)
     const [sort,setSort]=useState<'latest'|'oldest'|'rating'|'near'|null>(null)
     const [category,setCategory]=useState<string|null>(null)
+
+    const payload=getPayload()
+    if(!payload){
+        localStorage.removeItem('token')
+        return <Navigate to="/login"/>
+    }
+    const role=payload.role
 
     useEffect(()=>{
         async function fetchData(){
@@ -115,7 +123,16 @@ export default function(){
                 <option value="fast-food">Fast-food</option>
                 <option value="cafe">Cafe</option>
             </select>
-
+            {role==='admin'?
+            <Link
+                to="/addrestaurants"
+                className="add-restaurant-link"
+            >
+                + Add restaurant
+            </Link>
+            :
+            ''
+            }
         </div>
 
         {error ? <div className="error-box">{error}</div> : ''}
