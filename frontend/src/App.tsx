@@ -4,6 +4,7 @@ import Signup from './pages/Signup'
 import ProtectedRoute from './components/ProtectedRoute'
 import Restaurants from './pages/Restaurants'
 import EachRestaurant from './pages/EachRestaurant'
+import AddRestaurant from './pages/AddRestaurant'
 
 export default function(){
   return(
@@ -19,6 +20,11 @@ export default function(){
         <Route path="/restaurants/:id" element={
           <ProtectedRoute>
             <EachRestaurant/>
+          </ProtectedRoute>
+        }/>
+        <Route path="/addrestaurant" element={
+          <ProtectedRoute>
+            <AddRestaurant/>
           </ProtectedRoute>
         }/>
       </Routes>

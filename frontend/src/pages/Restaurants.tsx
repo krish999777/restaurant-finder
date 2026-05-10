@@ -125,7 +125,7 @@ export default function(){
             </select>
             {role==='admin'?
             <Link
-                to="/addrestaurants"
+                to="/addrestaurant"
                 className="add-restaurant-link"
             >
                 + Add restaurant
