@@ -1,8 +1,8 @@
 import './AddRestaurant.css'
 import {useState,useEffect} from 'react'
-import { MapContainer, TileLayer, Marker,useMap } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker,useMap,useMapEvents } from 'react-leaflet'
 
-function RecenterMap({coords}:{coords:[number,number]}){
+function RecenterMap({coords}:{coords:[number,number]}):null{
     const map=useMap()
     useEffect(()=>{
         if(coords){
@@ -12,6 +12,14 @@ function RecenterMap({coords}:{coords:[number,number]}){
             )
         }   
     },[coords,map])
+    return null
+}
+function MapEvents({setCoords}):null{
+    useMapEvents({
+        click(e){
+            setCoords([e.latlng.lng,e.latlng.lat])
+        }
+    })
     return null
 }
 export default function(){
@@ -43,6 +51,7 @@ export default function(){
                         scrollWheelZoom={false}
                     >
                         <RecenterMap coords={coords}/>
+                        <MapEvents setCoords={setCoords}/>
                         <TileLayer
                             attribution='&copy; OpenStreetMap contributors'
                             url={`https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png`}
