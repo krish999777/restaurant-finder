@@ -128,3 +128,17 @@ export async function getNearRestaurants({lat,long,search,category}:{
         throw new Error(err.response?.data?.error)
     }
 }
+export async function postRestaurants(body:{
+    name:string,
+    description:string,
+    categories?:string[],
+    coordinates:[number,number],
+    address:string
+}){
+    try{
+        const res=await api.post('/restaurants',body)
+        return res.data
+    }catch(err){
+        throw new Error(err.response?.data?.error)
+    }
+}

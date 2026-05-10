@@ -5,3 +5,231 @@
     overflow: hidden;
     margin-top: 1rem;
 }
+.add-restaurant-page {
+    min-height: 100vh;
+    background: var(--bg);
+    padding: 2rem;
+}
+
+.add-restaurant-wrapper {
+    max-width: 950px;
+    margin: 0 auto;
+}
+
+/* HEADER */
+
+.page-header {
+    margin-bottom: 2rem;
+}
+
+.page-header h1 {
+    margin: 0;
+    font-size: 2.4rem;
+    color: var(--text);
+}
+
+.page-header p {
+    margin-top: 0.7rem;
+    color: var(--subtext);
+    max-width: 600px;
+    line-height: 1.6;
+}
+
+/* FORM */
+
+.restaurant-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+}
+
+.field label {
+    font-weight: 600;
+    color: var(--text);
+    font-size: 0.92rem;
+}
+
+.field input,
+.field textarea {
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 0.95rem 1rem;
+    font-size: 0.95rem;
+    background: white;
+    outline: none;
+    transition: 0.2s ease;
+}
+
+.field textarea {
+    min-height: 130px;
+    resize: vertical;
+    font-family: inherit;
+}
+
+.field input:focus,
+.field textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.12);
+}
+
+/* CATEGORY GRID */
+
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(140px,1fr));
+    gap: 0.8rem;
+}
+
+.checkbox-card {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+
+    background: white;
+
+    border: 1px solid var(--border);
+    border-radius: 14px;
+
+    padding: 0.9rem 1rem;
+
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.checkbox-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-2px);
+}
+
+.checkbox-card input {
+    accent-color: var(--primary);
+}
+
+/* MAP */
+
+.map-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.location-helper {
+    color: var(--subtext);
+    font-size: 0.88rem;
+}
+
+.addrestaurant-map {
+    height: 420px;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 22px;
+    border: 1px solid var(--border);
+}
+
+.addrestaurant-map .leaflet-container {
+    height: 100%;
+    width: 100%;
+}
+
+/* BUTTONS */
+
+.location-btn,
+.submit-btn {
+    border: none;
+    cursor: pointer;
+    transition: 0.2s ease;
+    font-weight: 600;
+}
+
+.location-btn {
+    background: white;
+    border: 1px solid var(--border);
+
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+
+    color: var(--text);
+}
+
+.location-btn:hover {
+    border-color: var(--primary);
+}
+
+.submit-btn {
+    background: linear-gradient(
+        135deg,
+        var(--primary),
+        var(--accent)
+    );
+
+    color: white;
+
+    padding: 1rem 1.2rem;
+    border-radius: 14px;
+
+    font-size: 0.96rem;
+
+    box-shadow: 0 10px 24px rgba(234,88,12,0.16);
+}
+
+.submit-btn:hover {
+    opacity: 0.94;
+    transform: translateY(-2px);
+}
+
+.submit-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* ERROR + LOADING */
+
+.error-box,
+.loading-box {
+    padding: 1rem;
+    border-radius: 14px;
+    margin-bottom: 1.5rem;
+}
+
+.error-box {
+    background: #fee2e2;
+    color: var(--error);
+}
+
+.loading-box {
+    background: #fff7ed;
+    color: var(--primary);
+    border: 1px solid #fed7aa;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 700px) {
+
+    .add-restaurant-page {
+        padding: 1rem;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .map-top {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+}
