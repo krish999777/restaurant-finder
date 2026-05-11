@@ -122,6 +122,11 @@ export default function(){
                 <option value="veg">Veg</option>
                 <option value="fast-food">Fast-food</option>
                 <option value="cafe">Cafe</option>
+                <option value="dessert">Dessert</option>
+                <option value="casual">Casual</option>
+                <option value="dining">Dining</option>
+                <option value="buffet">Buffet</option>
+                <option value="pizzeria">Pizzeria</option>
             </select>
             {role==='admin'?
             <Link
