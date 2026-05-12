@@ -16,7 +16,7 @@ function RecenterMap({coords}:{coords:null|[number,number]}):null{
     return null
 }
 
-function MapEvents({setCoords}):null{
+function MapEvents({setCoords}:{setCoords:any}):null{
     useMapEvents({
         click(e){
             setCoords([e.latlng.lng,e.latlng.lat])
@@ -62,7 +62,7 @@ export default function ({postFunction,type,id,name,description,address,categori
                 await postFunction({name,description,address,categories,coordinates:coords})
             }
             navigate(type==='add'?'/restaurants':`/restaurants/${id}`)
-        }catch(err){
+        }catch(err:any){
             setError(err.message)
         }finally{
             setLoading(false)
