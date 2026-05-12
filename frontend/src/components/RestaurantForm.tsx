@@ -127,35 +127,35 @@ export default function ({postFunction,type,id,name,description,address,categori
                     <label>Categories</label>
                     <div className="categories-grid">
                         <label className="checkbox-card">
-                            <input type="checkbox" name="category" value="veg" defaultChecked={categories.includes('veg')}/>
+                            <input type="checkbox" name="category" value="veg" defaultChecked={categories?categories.includes('veg'):false}/>
                             <span>Veg</span>
                         </label>
                         <label className="checkbox-card">
-                            <input type="checkbox" name="category" value="fast-food" defaultChecked={categories.includes('fast-food')}/>
+                            <input type="checkbox" name="category" value="fast-food" defaultChecked={categories?categories.includes('fast-food'):false}/>
                             <span>Fast Food</span>
                         </label>
                         <label className="checkbox-card">
-                            <input type="checkbox" name="category" value="dessert" defaultChecked={categories.includes('dessert')}/>
+                            <input type="checkbox" name="category" value="dessert" defaultChecked={categories?categories.includes('dessert'):false}/>
                             <span>Dessert</span>
                         </label>
                         <label className="checkbox-card">
-                            <input type="checkbox" name="category" value="cafe" defaultChecked={categories.includes('cafe')}/>
+                            <input type="checkbox" name="category" value="cafe" defaultChecked={categories?categories.includes('cafe'):false}/>
                             <span>Cafe</span>
                         </label>
                         <label className="checkbox-card">
-                            <input type="checkbox" name="category" value="casual" defaultChecked={categories.includes('casual')}/>
+                            <input type="checkbox" name="category" value="casual" defaultChecked={categories?categories.includes('casual'):false}/>
                             <span>Casual</span>
                         </label>
                         <label className="checkbox-card">
-                            <input type="checkbox" name="category" value="dining" defaultChecked={categories.includes('dining')}/>
+                            <input type="checkbox" name="category" value="dining" defaultChecked={categories?categories.includes('dining'):false}/>
                             <span>Dining</span>
                         </label>
                         <label className="checkbox-card">
-                            <input type="checkbox" name="category" value="buffet" defaultChecked={categories.includes('buffet')}/>
+                            <input type="checkbox" name="category" value="buffet" defaultChecked={categories?categories.includes('buffet'):false}/>
                             <span>Buffet</span>
                         </label>
                         <label className="checkbox-card">
-                            <input type="checkbox" name="category" value="pizzeria" defaultChecked={categories.includes('pizzeria')}/>
+                            <input type="checkbox" name="category" value="pizzeria" defaultChecked={categories?categories.includes('pizzeria'):false}/>
                             <span>Pizzeria</span>
                         </label>
                     </div>
