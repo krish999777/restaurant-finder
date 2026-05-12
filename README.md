@@ -1,128 +1,178 @@
-FoodScout
+# FoodScout
 
-Role-based restaurant discovery platform with geospatial search, interactive maps, restaurant reviews, and admin management features.
+FoodScout is a full-stack restaurant discovery platform that allows users to explore nearby restaurants, view ratings and reviews, and interact with locations through an interactive map interface. Admins can manage restaurants with full CRUD functionality and geospatial location support.
 
-⸻
+---
 
-Preview
+## Live Demo
 
-Live Demo￼: https://food-scout-plum.vercel.app/
+Frontend: [FoodScout](https://food-scout-plum.vercel.app/)
 
 Backend API: https://food-scout.onrender.com
 
-⸻
+---
 
-Features
+# Features
 
-Authentication & Authorization
+## Authentication & Authorization
 
-* JWT-based authentication
-* Protected frontend routes
-* Role-based access control
-* Separate admin functionality
-* Persistent login using localStorage
+- JWT-based authentication
+- Protected frontend routes
+- Role-based access control
+- Separate admin functionality
+- Persistent login using localStorage
 
-Restaurant Discovery
+---
 
-* Browse restaurants
-* Search restaurants by name
-* Filter by category
-* Sort by:
-    * Latest
-    * Oldest
-    * Highest Rated
-    * Nearby Restaurants
-* Pagination support
+## Restaurant Discovery
 
-Restaurant Details
+- Browse restaurants
+- Search restaurants by name
+- Filter by category
+- Sort by:
+  - Latest
+  - Oldest
+  - Highest Rated
+  - Nearby Restaurants
+- Pagination support
 
-* Interactive map using Leaflet
-* Restaurant ratings and reviews
-* Category tags
-* Average rating calculation
-* Detailed restaurant information
+---
 
-Reviews System
+## Restaurant Details
 
-* Add ratings and reviews
-* One review per user restriction
-* Average rating calculation
-* Review validation
+- Interactive map using Leaflet
+- Restaurant ratings and reviews
+- Category tags
+- Average rating calculation
+- Detailed restaurant information
 
-Admin Features
+---
 
-* Add restaurants
-* Edit restaurants
-* Delete restaurants
-* Select restaurant location using interactive map
-* Auto-detect current location
+## Reviews System
 
-Geospatial Features
+- Add ratings and reviews
+- One review per user restriction
+- Average rating calculation
+- Review validation
 
-* Nearby restaurant search
-* Location-based restaurant discovery
-* Interactive map integration
-* Custom restaurant location selection
+---
 
-⸻
+## Admin Features
 
-Tech Stack
+- Add restaurants
+- Edit restaurants
+- Delete restaurants
+- Select restaurant location using interactive map
+- Auto-detect current location
 
-Frontend
+---
 
-* React
-* TypeScript
-* React Router DOM
-* Axios
-* React Leaflet
-* Leaflet
-* CSS
-* Vite
+## Geospatial Features
 
-Backend
+- Nearby restaurant search
+- Location-based restaurant discovery
+- Interactive map integration
+- Custom restaurant location selection
 
-* Node.js
-* Express.js
-* TypeScript
-* MongoDB
-* Mongoose
-* JWT Authentication
-* bcrypt
+---
 
-Deployment
+# Technical Highlights
 
-Frontend: https://food-scout-plum.vercel.app/
+- Geospatial MongoDB queries using `2dsphere` indexing
+- Reusable create/edit restaurant form architecture
+- Interactive map integration with React Leaflet
+- Role-based route protection
+- JWT authentication middleware
+- RESTful API architecture
 
-Backend: https://food-scout.onrender.com
+---
 
-Database: MongoDB Atlas
+# Tech Stack
 
-⸻
+## Frontend
 
-Screenshots
+- React
+- TypeScript
+- React Router DOM
+- Axios
+- React Leaflet
+- Leaflet
+- CSS
+- Vite
 
-Home / Restaurants Page
+---
+
+## Backend
+
+- Node.js
+- Express.js
+- TypeScript
+- MongoDB
+- Mongoose
+- JWT Authentication
+- bcrypt
+
+---
+
+## Deployment
+
+- Frontend: Vercel
+- Backend: Render
+- Database: MongoDB Atlas
+
+---
+
+# Screenshots
+
+## Home / Restaurants Page
 
 <img width="1470" height="801" alt="image" src="https://github.com/user-attachments/assets/c8c680ca-c417-42dd-9d5b-db98e42afd6e" />
 
-Restaurant Details Page
+---
+
+## Restaurant Details Page
 
 <img width="1470" height="801" alt="image" src="https://github.com/user-attachments/assets/6e865eef-12bd-42a7-85ed-dc337479ad2a" />
+
 <img width="1470" height="801" alt="image" src="https://github.com/user-attachments/assets/e63ede94-4432-4e17-9a5d-bdf3f4616dc3" />
 
-Add Restaurant Page
+---
+
+## Add Restaurant Page
 
 <img width="1470" height="801" alt="image" src="https://github.com/user-attachments/assets/c5d18f00-93d5-422f-ad3e-d2559907e808" />
+
 <img width="1470" height="801" alt="image" src="https://github.com/user-attachments/assets/09ee7517-5b0c-486b-9602-5e856ab15206" />
 
-Edit Restaurant Page
+---
+
+## Edit Restaurant Page
 
 <img width="1470" height="801" alt="image" src="https://github.com/user-attachments/assets/fbc76a70-2322-48d0-852a-3790ff12a67b" />
 
-⸻
+---
 
-Folder Structure
+# Demo Credentials
 
+## Admin Account
+
+```txt
+Email: PASTE_ADMIN_EMAIL
+Password: PASTE_ADMIN_PASSWORD
+```
+
+## User Account
+
+```txt
+Email: PASTE_USER_EMAIL
+Password: PASTE_USER_PASSWORD
+```
+
+---
+
+# Folder Structure
+
+```bash
 frontend/
 ├── src/
 │   ├── components/
@@ -130,7 +180,7 @@ frontend/
 │   ├── utils/
 │   ├── styles/
 │   └── App.tsx
-│
+
 backend/
 ├── src/
 │   ├── controllers/
@@ -139,111 +189,124 @@ backend/
 │   ├── routes/
 │   ├── config/
 │   └── server.ts
+```
 
-⸻
+---
 
-API Endpoints
+# API Endpoints
 
-Auth Routes
+## Auth Routes
 
-Method	Endpoint	Description
-POST	/api/auth/signup	Register user
-POST	/api/auth/login	Login user
+| Method | Endpoint | Description |
+|---|---|---|
+| POST | `/api/auth/signup` | Register user |
+| POST | `/api/auth/login` | Login user |
 
-Restaurant Routes
+---
 
-Method	Endpoint	Description
-GET	/api/restaurants	Get all restaurants
-GET	/api/restaurants/:id	Get single restaurant
-GET	/api/restaurants/near	Get nearby restaurants
-POST	/api/restaurants	Create restaurant (Admin)
-PUT	/api/restaurants/:id	Edit restaurant (Admin)
-DELETE	/api/restaurants/:id	Delete restaurant (Admin)
-POST	/api/restaurants/:id/rating	Add review
+## Restaurant Routes
 
-⸻
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/api/restaurants` | Get all restaurants |
+| GET | `/api/restaurants/:id` | Get single restaurant |
+| GET | `/api/restaurants/near` | Get nearby restaurants |
+| POST | `/api/restaurants` | Create restaurant (Admin) |
+| PUT | `/api/restaurants/:id` | Edit restaurant (Admin) |
+| DELETE | `/api/restaurants/:id` | Delete restaurant (Admin) |
+| POST | `/api/restaurants/:id/rating` | Add review |
 
-Installation
+---
 
-Clone Repository
+# Installation
 
+## Clone Repository
+
+```bash
 git clone https://github.com/krish999777/restaurant-finder
+```
 
-⸻
+---
 
-Backend Setup
+# Environment Variables
 
+## Backend `.env`
+
+```env
+MONGO_URI=YOUR_MONGO_URI
+JWT_KEY=YOUR_SECRET_KEY
+PORT=8000
+```
+
+## Frontend `.env`
+
+```env
+VITE_API_URL=YOUR_BACKEND_URL
+```
+
+---
+
+# Backend Setup
+
+```bash
 cd backend
 npm install
-
-Create .env file:
-
-MONGO_URI=PASTE_MONGO_URI
-JWT_KEY=PASTE_SECRET_KEY
-PORT=8000
-
-Run backend:
-
 npm run dev
+```
 
-⸻
+---
 
-Frontend Setup
+# Frontend Setup
 
+```bash
 cd frontend
 npm install
-
-Create .env file:
-
-VITE_API_URL=PASTE_BACKEND_URL
-
-Run frontend:
-
 npm run dev
+```
 
-⸻
+---
 
-Future Improvements
+# Challenges Faced
 
-* Restaurant image uploads
-* Better mobile responsiveness
-* Advanced filtering
-* Bookmark/favorites system
-* Review editing/deletion
-* Better loading skeletons
-* Map clustering
-* Infinite scrolling
+- Implementing reusable create/edit restaurant forms
+- Managing interactive map state with React Leaflet
+- Geospatial queries using MongoDB
+- Authentication and protected routes
+- Role-based frontend rendering
+- TypeScript type safety during deployment
+- Production deployment configuration
 
-⸻
+---
 
-Challenges Faced
+# Learnings
 
-* Implementing reusable create/edit restaurant forms
-* Managing interactive map state with React Leaflet
-* Geospatial queries using MongoDB
-* Authentication and protected routes
-* Role-based frontend rendering
-* TypeScript type safety during deployment
-* Production deployment configuration
+- Full-stack application architecture
+- Reusable component design
+- REST API development
+- JWT authentication flow
+- Geospatial database queries
+- React Leaflet integration
+- Deployment workflows
+- TypeScript strict mode handling
 
-⸻
+---
 
-Learnings
+# Future Improvements
 
-* Full-stack application architecture
-* Reusable component design
-* REST API development
-* JWT authentication flow
-* Geospatial database queries
-* React Leaflet integration
-* Deployment workflows
-* TypeScript strict mode handling
+- Restaurant image uploads
+- Better mobile responsiveness
+- Advanced filtering
+- Bookmark/favorites system
+- Review editing/deletion
+- Better loading skeletons
+- Map clustering
+- Infinite scrolling
 
-⸻
+---
 
-Author
+# Author
 
-Name: Krish Shah
+## Krish Shah
 
 GitHub: https://github.com/krish999777
 
