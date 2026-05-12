@@ -1,5 +1,5 @@
 import type {Request,Response} from 'express'
-import Restaurant from '../models/restaurant'
+import Restaurant from '../models/restaurant.js'
 import mongoose from 'mongoose'
 
 export async function getEachRestaurant(req:Request<{id:string}>,res:Response){

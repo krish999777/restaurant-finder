@@ -1,10 +1,10 @@
 import express from 'express'
 import type {Express} from 'express'
 import dotenv from 'dotenv'
-import db from './config/db'
-import restaurantsRouter from './routers/restaurantsRouter'
-import authRouter from './routers/authRouter'
-import isAuthenticated from './middleware/isAuthenticated'
+import db from './config/db.js'
+import restaurantsRouter from './routers/restaurantsRouter.js'
+import authRouter from './routers/authRouter.js'
+import isAuthenticated from './middleware/isAuthenticated.js'
 import cors from 'cors'
 
 const app:Express=express()

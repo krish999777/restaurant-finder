@@ -1,6 +1,6 @@
 import type {Request,Response} from 'express'
-import Restaurants from '../models/restaurant'
-import type {RestaurantType} from '../models/restaurant'
+import Restaurants from '../models/restaurant.js'
+import type {RestaurantType} from '../models/restaurant.js'
 
 type RequestBody={
     name:string,

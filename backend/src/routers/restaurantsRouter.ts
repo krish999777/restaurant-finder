@@ -1,9 +1,9 @@
 import express from 'express'
 import type {Router} from 'express'
-import {postRestaurantsController,getRestaurantsController,getRestaurantsNearController} from '../controllers/restaurantsController'
-import {postRatingController} from '../controllers/ratingController'
-import {getEachRestaurant,putEachRestaurant,deleteEachRestaurant} from '../controllers/eachRestauarantController'
-import isAdmin from '../middleware/isAdmin'
+import {postRestaurantsController,getRestaurantsController,getRestaurantsNearController} from '../controllers/restaurantsController.js'
+import {postRatingController} from '../controllers/ratingController.js'
+import {getEachRestaurant,putEachRestaurant,deleteEachRestaurant} from '../controllers/eachRestauarantController.js'
+import isAdmin from '../middleware/isAdmin.js'
 
 const router:Router=express.Router()
 
