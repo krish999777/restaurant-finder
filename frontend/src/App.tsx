@@ -5,6 +5,7 @@ import ProtectedRoute from './components/ProtectedRoute'
 import Restaurants from './pages/Restaurants'
 import EachRestaurant from './pages/EachRestaurant'
 import AddRestaurant from './pages/AddRestaurant'
+import EditRestaurant from './pages/EditRestaurants'
 
 export default function(){
   return(
@@ -25,6 +26,11 @@ export default function(){
         <Route path="/addrestaurant" element={
           <ProtectedRoute>
             <AddRestaurant/>
+          </ProtectedRoute>
+        }/>
+        <Route path="/editrestaurant/:id" element={
+          <ProtectedRoute>
+            <EditRestaurant/>
           </ProtectedRoute>
         }/>
       </Routes>

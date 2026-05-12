@@ -142,3 +142,17 @@ export async function postRestaurants(body:{
         throw new Error(err.response?.data?.error)
     }
 }
+export async function putEachRestaurant(id:string,body:{
+    name:string,
+    description:string,
+    address:string,
+    categories:string[],
+    coordinates:[number,number]
+}){
+    try{
+        const res=await api.put(`/restaurants/${id}`,body)
+        return res.data
+    }catch(err){
+        throw new Error(err.response?.data?.error)
+    }
+}

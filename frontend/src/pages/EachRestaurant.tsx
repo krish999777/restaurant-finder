@@ -1,8 +1,9 @@
 import './EachRestaurant.css'
-import {useParams,Link} from 'react-router-dom'
+import {useParams,Link,Navigate} from 'react-router-dom'
 import {useState,useEffect} from 'react'
 import type {RestaurantType} from '../utils/api'
 import {getEachRestaurant,postRating} from '../utils/api'
+import {getPayload} from '../utils/jwt'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 
 export default function(){
@@ -13,7 +14,15 @@ export default function(){
     const [currentRating,setCurrentRating]=useState<number>(0)
     const [ratingLoading,setRatingLoading]=useState<boolean>(false)
 
+    const payload=getPayload()
     const {id}=useParams()
+
+    if(!payload||!payload.role){
+        localStorage.removeItem('token')
+        return <Navigate to="/login" />
+    }
+    const role=payload.role
+
 
     async function fetchData(){
         try{
@@ -90,11 +99,28 @@ export default function(){
                             ))}
                         </div>
                     </div>
+                    <div className="restaurant-header-right">
+                        <div className="rating-box">
+                            ⭐ {restaurant.avgRating.toFixed(1)}
+                        </div>
+                        {role === 'admin' ? (
+                            <div className="admin-actions">
 
-                    <div className="rating-box">
-                        ⭐ {restaurant.avgRating.toFixed(1)}
+                                <Link
+                                    to={`/editrestaurant/${id}`}
+                                    className="edit-btn"
+                                >
+                                    Edit Restaurant
+                                </Link>
+
+                                <button className="delete-btn">
+                                    Delete
+                                </button>
+
+                            </div>
+                        ) : ''}
+
                     </div>
-
                 </div>
                 <div className="restaurant-map">
                         <MapContainer 

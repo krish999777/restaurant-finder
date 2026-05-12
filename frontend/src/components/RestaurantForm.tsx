@@ -3,7 +3,7 @@ import type {SubmitEvent} from 'react'
 import {useNavigate} from 'react-router-dom'
 import { MapContainer, TileLayer, Marker,useMap,useMapEvents } from 'react-leaflet'
 
-function RecenterMap({coords}:{coords:[number,number]}):null{
+function RecenterMap({coords}:{coords:null|[number,number]}):null{
     const map=useMap()
     useEffect(()=>{
         if(coords){
@@ -24,12 +24,17 @@ function MapEvents({setCoords}):null{
     })
     return null
 }
-export default function ({postFunction,type,id}:{
-    postFunction:any,
+export default function ({postFunction,type,id,name,description,address,categories,coordinates}:{
+    postFunction:any
     type:'add'|'edit',
-    id?:string
+    id?:string,
+    name?:string,
+    description?:string,
+    address?:string,
+    categories?:string[],
+    coordinates?:[number,number]
 }){
-    const [coords,setCoords]=useState<null|[number,number]>(null)
+    const [coords,setCoords]=useState<null|[number,number]>(coordinates||null)
     const [error,setError]=useState<string|null>(null)
     const [loading,setLoading]=useState<boolean>(false)
 
@@ -51,7 +56,11 @@ export default function ({postFunction,type,id}:{
             return
         }
         try{
-            await postFunction({name,description,address,categories,coordinates:coords})
+            if(type==='edit'){
+                await postFunction(id,{name,description,address,categories,coordinates:coords})
+            }else{
+                await postFunction({name,description,address,categories,coordinates:coords})
+            }
             navigate(type==='add'?'/restaurants':`/restaurants/${id}`)
         }catch(err){
             setError(err.message)
@@ -91,6 +100,7 @@ export default function ({postFunction,type,id}:{
                             required={true}
                             name="name"
                             placeholder="Enter restaurant name"
+                            defaultValue={type==='edit'?name:''}
                         />
                     </div>
                     <div className="field">
@@ -100,6 +110,7 @@ export default function ({postFunction,type,id}:{
                             required={true}
                             name="address"
                             placeholder="Enter address"
+                            defaultValue={type==='edit'?address:''}
                         />
                     </div>
                 </div>
@@ -109,41 +120,42 @@ export default function ({postFunction,type,id}:{
                         required={true}
                         name="description"
                         placeholder="Describe the restaurant..."
+                        defaultValue={type==='edit'?description:''}
                     />
                 </div>
                 <div className="field">
                     <label>Categories</label>
                     <div className="categories-grid">
                         <label className="checkbox-card">
-                            <input type="checkbox" name="category" value="veg"/>
+                            <input type="checkbox" name="category" value="veg" defaultChecked={categories.includes('veg')}/>
                             <span>Veg</span>
                         </label>
                         <label className="checkbox-card">
-                            <input type="checkbox" name="category" value="fast-food"/>
+                            <input type="checkbox" name="category" value="fast-food" defaultChecked={categories.includes('fast-food')}/>
                             <span>Fast Food</span>
                         </label>
                         <label className="checkbox-card">
-                            <input type="checkbox" name="category" value="dessert"/>
+                            <input type="checkbox" name="category" value="dessert" defaultChecked={categories.includes('dessert')}/>
                             <span>Dessert</span>
                         </label>
                         <label className="checkbox-card">
-                            <input type="checkbox" name="category" value="cafe"/>
+                            <input type="checkbox" name="category" value="cafe" defaultChecked={categories.includes('cafe')}/>
                             <span>Cafe</span>
                         </label>
                         <label className="checkbox-card">
-                            <input type="checkbox" name="category" value="casual"/>
+                            <input type="checkbox" name="category" value="casual" defaultChecked={categories.includes('casual')}/>
                             <span>Casual</span>
                         </label>
                         <label className="checkbox-card">
-                            <input type="checkbox" name="category" value="dining"/>
+                            <input type="checkbox" name="category" value="dining" defaultChecked={categories.includes('dining')}/>
                             <span>Dining</span>
                         </label>
                         <label className="checkbox-card">
-                            <input type="checkbox" name="category" value="buffet"/>
+                            <input type="checkbox" name="category" value="buffet" defaultChecked={categories.includes('buffet')}/>
                             <span>Buffet</span>
                         </label>
                         <label className="checkbox-card">
-                            <input type="checkbox" name="category" value="pizzeria"/>
+                            <input type="checkbox" name="category" value="pizzeria" defaultChecked={categories.includes('pizzeria')}/>
                             <span>Pizzeria</span>
                         </label>
                     </div>
