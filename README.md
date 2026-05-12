@@ -154,18 +154,11 @@ Backend API: https://food-scout.onrender.com
 
 # Demo Credentials
 
-## Admin Account
-
-```txt
-Email: PASTE_ADMIN_EMAIL
-Password: PASTE_ADMIN_PASSWORD
-```
-
 ## User Account
 
 ```txt
-Email: PASTE_USER_EMAIL
-Password: PASTE_USER_PASSWORD
+Email: demo@gmail.com
+Password: demo123
 ```
 
 ---
