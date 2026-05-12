@@ -156,3 +156,10 @@ export async function putEachRestaurant(id:string,body:{
         throw new Error(err.response?.data?.error)
     }
 }
+export async function deleteRestaurant(id:string){
+    try{
+        await api.delete(`/restaurants/${id}`)
+    }catch(err){
+        throw new Error(err.response?.data?.error)
+    }
+}

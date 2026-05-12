@@ -1,8 +1,8 @@
 import './EachRestaurant.css'
-import {useParams,Link,Navigate} from 'react-router-dom'
+import {useParams,Link,Navigate,useNavigate} from 'react-router-dom'
 import {useState,useEffect} from 'react'
 import type {RestaurantType} from '../utils/api'
-import {getEachRestaurant,postRating} from '../utils/api'
+import {getEachRestaurant,postRating,deleteRestaurant} from '../utils/api'
 import {getPayload} from '../utils/jwt'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 
@@ -14,6 +14,7 @@ export default function(){
     const [currentRating,setCurrentRating]=useState<number>(0)
     const [ratingLoading,setRatingLoading]=useState<boolean>(false)
 
+    const navigate=useNavigate()
     const payload=getPayload()
     const {id}=useParams()
 
@@ -55,6 +56,16 @@ export default function(){
             setError(err.message)
         }finally{
             setRatingLoading(false)
+        }
+    }
+    async function handleDelete(){
+        if(confirm('Are you sure you want to delete?')){
+            try{
+                await deleteRestaurant(id)
+                navigate('/restaurants')
+            }catch(err){
+                setError(err.message)
+            }
         }
     }
 
@@ -113,7 +124,10 @@ export default function(){
                                     Edit Restaurant
                                 </Link>
 
-                                <button className="delete-btn">
+                                <button 
+                                    className="delete-btn"
+                                    onClick={handleDelete}
+                                >
                                     Delete
                                 </button>
 
