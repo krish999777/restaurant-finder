@@ -6,11 +6,13 @@ import Restaurants from './pages/Restaurants'
 import EachRestaurant from './pages/EachRestaurant'
 import AddRestaurant from './pages/AddRestaurant'
 import EditRestaurant from './pages/EditRestaurants'
+import Root from './pages/Root'
 
 export default function(){
   return(
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<Root/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/signup" element={<Signup/>}/>
         <Route path="/restaurants" element={
