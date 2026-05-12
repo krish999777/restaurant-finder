@@ -46,7 +46,7 @@ export async function putEachRestaurant(req:Request<{id:string},unknown,{
         }
         restaurant.name=name?name.trim()?name.trim():restaurant.name:restaurant.name
         restaurant.description=description?description.trim()?description.trim():restaurant.description:restaurant.description
-        restaurant.categories=categories?categories.length>0?categories:restaurant.categories:restaurant.categories
+        restaurant.categories=categories?categories:restaurant.categories
         restaurant.address=address?address.trim()?address.trim():restaurant.address:restaurant.address
         restaurant.location.coordinates=coordinates?coordinates.length===2?coordinates:restaurant.location.coordinates:restaurant.location.coordinates
         await restaurant.save()
