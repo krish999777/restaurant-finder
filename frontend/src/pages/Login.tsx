@@ -21,8 +21,7 @@ export default function (): JSX.Element {
         try{
             await postLogin({email,password})
             navigate('/restaurants')
-        }catch(err){
-            console.log(err.message)
+        }catch(err:any){
             setError(err.message)
         }finally{
             setLoading(false)

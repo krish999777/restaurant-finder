@@ -50,7 +50,7 @@ export async function signupController(req:Request<null,unknown,{
             }
         })
     }catch(err){
-        console.log(err)
+         
         res.status(500).json({error:"Internal server error"})
     }
 

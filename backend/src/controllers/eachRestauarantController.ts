@@ -23,7 +23,7 @@ export async function getEachRestaurant(req:Request<{id:string}>,res:Response){
         }
         return res.status(200).json({restaurant:updatedRestaurants})
     }catch(err){
-        console.log(err)
+         
         return res.status(500).json({error:"Internal server error"})
     }
 }
@@ -52,7 +52,7 @@ export async function putEachRestaurant(req:Request<{id:string},unknown,{
         await restaurant.save()
         return res.status(200).json({ restaurant })
     }catch(err){
-        console.log(err)
+         
         return res.status(500).json({error:"Internal server error"})
     }   
 }
@@ -68,7 +68,7 @@ export async function deleteEachRestaurant(req:Request<{id:string}>,res:Response
         }
         return res.status(204).send()
     }catch(err){
-        console.log(err)
+         
         res.status(500).json({error:"Internal server error"})
     }
 }

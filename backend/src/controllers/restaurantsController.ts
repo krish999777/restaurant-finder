@@ -49,7 +49,7 @@ export async function postRestaurantsController(
         await restaurant.save()
         res.status(201).json({restaurant:restaurant})
     }catch(err){
-        console.log(err)
+         
         res.status(500).json({error:"Internal server error"})
     }
 }
@@ -104,7 +104,7 @@ export async function getRestaurantsController(req:Request<null,unknown,unknown,
             pages: Math.ceil(total / 10)
         })
     }catch(err){
-        console.log(err)
+         
         res.status(500).json({error:"Internal server error"})
     }
 }
@@ -171,7 +171,7 @@ export async function getRestaurantsNearController(req:Request<null,unknown,unkn
             restaurants:updatedRestaurants
         })
     }catch(err){
-        console.log(err)
+         
         res.status(500).json({error:"Internal server error"})
     }
 }

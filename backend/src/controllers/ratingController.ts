@@ -53,7 +53,7 @@ export async function postRatingController(req:Request<{id:string},unknown,ratin
             description
         }})
     }catch(err){
-        console.log(err)
+         
         res.status(500).json({error:"Internal server error"})
     }
 }
